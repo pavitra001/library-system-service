@@ -29,6 +29,7 @@ public class CategoryControllerTest {
 
     List<Category> myCategories;
 
+
     @Test
     public void findAllCategoriesTest(){
         myCategories = new ArrayList<Category>();
@@ -72,4 +73,17 @@ public class CategoryControllerTest {
         assertEquals(1,categoryController.addBookCategory(bookCategory).getBookId());
     }
 
+    @Test
+    public void findAllCategoriesByBookIdTest(){
+        List<BookCategory> bookCategories= new ArrayList<BookCategory>();
+        int bookId=5;
+        bookCategories.add(new BookCategory(1,bookId,"Horror"));
+        bookCategories.add(new BookCategory(2,bookId,"Adventure"));
+
+        when(categoryService.findAllCategoriesByBookId(bookId)).thenReturn(bookCategories);
+        ResponseEntity<List<BookCategory>> response = categoryController.findAllCategoriesByBookId(bookId);
+
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(2,response.getBody().size());
+    }
 }

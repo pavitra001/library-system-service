@@ -59,4 +59,9 @@ public class CategoryService {
 
         return categoryRepository.findAll();
     }
+
+    public List<BookCategory> findAllCategoriesByBookId(int bookId){
+        List<BookCategory> bookCategories=bookCategoryRepository.findAllCategoriesByBookId(bookId);
+        return bookCategories;
+    }
 }

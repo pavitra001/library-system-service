@@ -56,5 +56,15 @@ public class CategoryController {
         return new ResponseEntity<List<Category>>(categories, HttpStatus.OK);
     }
 
+    @GetMapping("categories/{bookId}")
+    public ResponseEntity<List<BookCategory>> findAllCategoriesByBookId(@PathVariable int bookId) {
+        List<BookCategory> categories = categoryService.findAllCategoriesByBookId(bookId);
+
+        if (categories.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(categories);
+    }
 
 }
